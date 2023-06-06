@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
@@ -30,6 +30,12 @@ public class CoachEntity {
 
     @TableField("school_name")
     private String schoolName;
+
+    @TableField("username")
+    private String username;
+
+    @TableField("`password`")
+    private String password;
 
     @TableField("coach_name")
     private String coachName;

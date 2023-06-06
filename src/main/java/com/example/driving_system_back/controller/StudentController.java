@@ -1,7 +1,12 @@
 package com.example.driving_system_back.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.driving_system_back.entity.StudentEntity;
+import com.example.driving_system_back.mapper.StudentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student-entity")
 public class StudentController {
+
+    @Autowired
+    StudentMapper studentMapper;
+
+    @PostMapping("/studentLogin")
+    public List<StudentEntity> studentLogin(@RequestBody StudentEntity studentEntity){
+        return studentMapper.selectList(new QueryWrapper<StudentEntity>().eq("username",studentEntity.getUsername()).eq("`password`",studentEntity.getPassword()));
+    }
 
 }
