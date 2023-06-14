@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.driving_system_back.entity.CoachEntity;
 import com.example.driving_system_back.mapper.CoachMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,11 @@ public class CoachController {
     @PostMapping("/coachLogin")
     public List<CoachEntity> coachLogin(@RequestBody CoachEntity coachEntity){
         return coachMapper.selectList(new QueryWrapper<CoachEntity>().eq("username",coachEntity.getUsername()).eq("`password`",coachEntity.getPassword()));
+    }
+
+    @GetMapping("/getCoach/{id}")
+    public CoachEntity getCoach(@PathVariable String id){
+        return coachMapper.selectById(id);
     }
 
 }
