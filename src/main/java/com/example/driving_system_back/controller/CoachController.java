@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
@@ -24,13 +24,20 @@ public class CoachController {
     CoachMapper coachMapper;
 
     @PostMapping("/coachLogin")
-    public List<CoachEntity> coachLogin(@RequestBody CoachEntity coachEntity){
-        return coachMapper.selectList(new QueryWrapper<CoachEntity>().eq("username",coachEntity.getUsername()).eq("`password`",coachEntity.getPassword()));
+    public List<CoachEntity> coachLogin(@RequestBody CoachEntity coachEntity) {
+        return coachMapper.selectList(new QueryWrapper<CoachEntity>().eq("username", coachEntity.getUsername()).eq("`password`", coachEntity.getPassword()));
     }
 
     @GetMapping("/getCoach/{id}")
-    public CoachEntity getCoach(@PathVariable String id){
+    public CoachEntity getCoach(@PathVariable String id) {
         return coachMapper.selectById(id);
+    }
+
+    //更新教练信息
+    @PostMapping("/updateCoach")
+    public CoachEntity updateCoach(@RequestBody CoachEntity coachEntity) {
+        coachMapper.updateById(coachEntity);
+        return coachEntity;
     }
 
 }
