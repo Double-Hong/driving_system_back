@@ -68,5 +68,4 @@ public class StudentEntity {
     @TableField("study_type")
     private String studyType;
 
-
 }

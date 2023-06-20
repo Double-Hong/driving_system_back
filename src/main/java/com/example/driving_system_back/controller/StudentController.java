@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.driving_system_back.entity.Result;
 import com.example.driving_system_back.entity.StudentEntity;
+import com.example.driving_system_back.mapper.HealthMapper;
 import com.example.driving_system_back.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 /**
  * <p>
@@ -21,14 +23,50 @@ import java.util.List;
 @RestController
 @RequestMapping("/student-entity")
 public class StudentController {
-
     @Autowired
     StudentMapper studentMapper;
-
+    @Autowired
+    HealthMapper healthMapper;
     @PostMapping("/studentLogin")
     public List<StudentEntity> studentLogin(@RequestBody StudentEntity studentEntity){
         return studentMapper.selectList(new QueryWrapper<StudentEntity>().eq("username",studentEntity.getUsername()).eq("`password`",studentEntity.getPassword()));
     }
+    @ResponseBody
+    @GetMapping("/studentDelete/{id}")
+    public int studentDelete(@PathVariable int id){
+        return studentMapper.deleteById(id);
+    }
+
+    @ResponseBody
+    @GetMapping("/selectStudentIdByUserName/{username}")//通过username找到学员id
+    public String selectStudentIdByUserName(@PathVariable  String username){
+        return studentMapper.selectOne(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getUsername,username)).getStudentId();
+    }
+    @ResponseBody
+    @GetMapping("/selectStudentById/{id}")//查找学员信息通过id
+    public StudentEntity selectStudentById(@PathVariable  String id){
+        return studentMapper.selectById(id);
+    }
+//    @ResponseBody
+//    @PostMapping("insertStudent")//添加学生信息
+//    public int insertStudent(@RequestBody StudentEntity studentEntity){
+//        return studentMapper.insert(studentEntity);
+//    }
+    @ResponseBody
+    @PostMapping("updateStudentById")//输入学生全部信息修改学生信息
+    public int updateStudentById(@RequestBody StudentEntity studentEntity){
+        return studentMapper.updateById(studentEntity);
+    }
+
+    @ResponseBody
+    @GetMapping("getImageUrlByStudentId/{id}")
+    public String getImageUrlByStudentId(@PathVariable String id){
+        String healthyId;
+        healthyId=studentMapper.selectOne(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getStudentId,id)).getHealthId();
+        return healthMapper.selectById(healthyId).getImageUrl();
+
+    }
+
 
     public List<StudentEntity> findStudentByStudentName(String Name){
         return studentMapper.selectList(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getStudentName, Name));
@@ -40,6 +78,4 @@ public class StudentController {
         List<StudentEntity> students=findStudentByStudentName(studentName);
         return Result.success(students);
     }
-
-
 }

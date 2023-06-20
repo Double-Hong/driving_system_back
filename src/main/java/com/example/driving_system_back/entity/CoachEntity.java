@@ -58,5 +58,6 @@ public class CoachEntity {
     @TableField("introduction")
     private String introduction;
 
-
+   @TableField("password")
+    private  String password;
 }

@@ -1,7 +1,12 @@
 package com.example.driving_system_back.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.driving_system_back.entity.HealthEntity;
+import com.example.driving_system_back.entity.StudentEntity;
+import com.example.driving_system_back.mapper.HealthMapper;
+import com.example.driving_system_back.mapper.StudentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -14,5 +19,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/health-entity")
 public class HealthController {
+ @Autowired
+    HealthMapper healthMapper;
+ @Autowired
+    StudentMapper studentMapper;
 
+ @ResponseBody
+    @GetMapping("setImageUrlByStudentId/{id}/{imageUrl}")
+    public HealthEntity setImageUrlByStudentId(@PathVariable String id,@PathVariable String imageUrl){
+    String health =  studentMapper.selectOne(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getStudentId,id)).getHealthId();
+
+    return  healthMapper.selectById(health).setImageUrl(imageUrl);
+ }
+ @ResponseBody
+    @GetMapping("getHealthyDataByStudentId/{Id}")
+    public HealthEntity getHealthyDataByStudentId(@PathVariable String Id){
+
+     return healthMapper.selectById(studentMapper.selectById(Id).getHealthId());
+ }
+ @ResponseBody
+    @PostMapping ("/updateHealty")
+    public  int updateHealty(@RequestBody HealthEntity healthEntity){
+     return healthMapper.updateById(healthEntity);
+ }
 }
