@@ -17,4 +17,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdministratorServiceImpl extends ServiceImpl<AdministratorMapper, AdministratorEntity> implements AdministratorService {
 
+
+
+    public int login(AdministratorEntity administrator) {
+        this.save(administrator);
+        return 1;
+    }
+
 }
