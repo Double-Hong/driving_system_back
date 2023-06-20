@@ -1,7 +1,12 @@
 package com.example.driving_system_back.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.driving_system_back.entity.CoachEntity;
+import com.example.driving_system_back.mapper.CoachMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/coach-entity")
 public class CoachController {
+      @Autowired
+    CoachMapper coachMapper;
+      /*
+      通过教练id得到教练信息
+       */
+      @GetMapping("getCoachById/{id}")
+    public CoachEntity getCoachById (@PathVariable String id){
+
+          return coachMapper.selectById(id);
+      }
+      @GetMapping("getAllCoachBySchoolName/{schoolName}")
+    public List<CoachEntity> getAllCoach(@PathVariable String schoolName){
+          return  coachMapper.selectList(Wrappers.<CoachEntity>lambdaQuery().eq(CoachEntity::getSchoolName,schoolName));
+      }
 
 }

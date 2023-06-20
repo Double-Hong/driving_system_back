@@ -43,5 +43,7 @@ public class HealthEntity {
     @TableField("student_id")
     private String studentId;
 
+    @TableField("image_url")
+    private  String imageUrl;
 
 }
