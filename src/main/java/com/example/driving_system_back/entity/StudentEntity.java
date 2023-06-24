@@ -29,9 +29,6 @@ public class StudentEntity {
     @TableId(value = "student_id", type = IdType.AUTO)
     private String studentId;
 
-    @TableField("exam_id")
-    private String examId;
-
     @TableField("school_name")
     private String schoolName;
 
@@ -67,5 +64,8 @@ public class StudentEntity {
 
     @TableField("study_type")
     private String studyType;
+
+    @TableField("head_photo")
+    private String headPhoto;
 
 }

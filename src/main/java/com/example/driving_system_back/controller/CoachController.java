@@ -53,4 +53,11 @@ public class CoachController {
         return coachEntity;
     }
 
+    //更换头像
+    @PostMapping("/updateCoachPhoto")
+    public int updateCoachPhoto(@RequestBody CoachEntity coachEntity){
+        coachMapper.updateById(coachEntity);
+        return 1;
+    }
+
 }
