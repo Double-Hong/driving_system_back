@@ -38,9 +38,6 @@ public class StudentEntity {
     @TableField("health_id")
     private String healthId;
 
-    @TableField("practice_id")
-    private String practiceId;
-
     @TableField("username")
     private String username;
 
