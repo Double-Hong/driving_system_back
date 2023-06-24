@@ -4,25 +4,21 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.sql.Date;
 import java.time.LocalDate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
  * @since 2023-06-03 14:03:41
  */
-@Data
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -33,9 +29,6 @@ public class StudentEntity {
     @TableId(value = "student_id", type = IdType.AUTO)
     private String studentId;
 
-    @TableField("exam_id")
-    private String examId;
-
     @TableField("school_name")
     private String schoolName;
 
@@ -44,9 +37,6 @@ public class StudentEntity {
 
     @TableField("health_id")
     private String healthId;
-
-    @TableField("practice_id")
-    private String practiceId;
 
     @TableField("username")
     private String username;
@@ -60,9 +50,8 @@ public class StudentEntity {
     @TableField("gender")
     private String gender;
 
-
     @TableField("birthday")
-    private Date birthday;
+    private LocalDate birthday;
 
     @TableField("phone")
     private String phone;
@@ -72,5 +61,8 @@ public class StudentEntity {
 
     @TableField("study_type")
     private String studyType;
+
+    @TableField("head_photo")
+    private String headPhoto;
 
 }

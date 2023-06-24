@@ -12,38 +12,30 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 考试记录
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
- * @since 2023-06-03 14:03:41
+ * @since 2023-06-24 10:27:57
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("health")
-@ApiModel(value = "HealthEntity对象", description = "")
-public class HealthEntity {
+@TableName("exam_records")
+@ApiModel(value = "ExamRecordsEntity对象", description = "考试记录")
+public class ExamRecordsEntity {
 
-    @TableId(value = "health_id", type = IdType.AUTO)
-    private String healthId;
-
-    @TableField("allergy_history")
-    private String allergyHistory;
-
-    @TableField("surgical_history")
-    private String surgicalHistory;
-
-    @TableField("height")
-    private Double height;
-
-    @TableField("weight")
-    private Double weight;
+    @TableId(value = "exam_records_id", type = IdType.AUTO)
+    private String examRecordsId;
 
     @TableField("student_id")
     private String studentId;
 
-    @TableField("image_url")
-    private  String imageUrl;
+    @TableField("examination_id")
+    private String examinationId;
+
+    @TableField("score")
+    private Double score;
+
 
 }

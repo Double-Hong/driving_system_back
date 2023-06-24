@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 打卡信息 前端控制器
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
- * @since 2023-06-03 14:03:41
+ * @since 2023-06-24 10:27:57
  */
 @RestController
-@RequestMapping("/exam-entity")
-public class ExamController {
+@RequestMapping("/check-information-entity")
+public class CheckInformationController {
 
 }

@@ -1,23 +1,18 @@
 package com.example.driving_system_back.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.driving_system_back.common.vo.Result;
+import com.example.driving_system_back.entity.Result;
 import com.example.driving_system_back.entity.StudentEntity;
+import com.example.driving_system_back.mapper.HealthMapper;
 import com.example.driving_system_back.mapper.StudentMapper;
 import com.example.driving_system_back.service.StudentService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+
 
 /**
  * <p>
@@ -30,20 +25,55 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/student-entity")
 public class StudentController {
-
     @Autowired
     StudentMapper studentMapper;
     @Autowired
-    private StudentService studentService;
-
+    HealthMapper healthMapper;
+    @Autowired
+    StudentService studentService;
     @PostMapping("/studentLogin")
     public List<StudentEntity> studentLogin(@RequestBody StudentEntity studentEntity){
         return studentMapper.selectList(new QueryWrapper<StudentEntity>().eq("username",studentEntity.getUsername()).eq("`password`",studentEntity.getPassword()));
     }
+    @ResponseBody
+    @GetMapping("/studentDelete/{id}")
+    public int studentDelete(@PathVariable int id){
+        return studentMapper.deleteById(id);
+    }
+
+    @ResponseBody
+    @GetMapping("/selectStudentIdByUserName/{username}")//通过username找到学员id
+    public String selectStudentIdByUserName(@PathVariable  String username){
+        return studentMapper.selectOne(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getUsername,username)).getStudentId();
+    }
+    @ResponseBody
+    @GetMapping("/selectStudentById/{id}")//查找学员信息通过id
+    public StudentEntity selectStudentById(@PathVariable  String id){
+        return studentMapper.selectById(id);
+    }
+//    @ResponseBody
+//    @PostMapping("insertStudent")//添加学生信息
+//    public int insertStudent(@RequestBody StudentEntity studentEntity){
+//        return studentMapper.insert(studentEntity);
+//    }
+    @ResponseBody
+    @PostMapping("updateStudentById")//输入学生全部信息修改学生信息
+    public int updateStudentById(@RequestBody StudentEntity studentEntity){
+        return studentMapper.updateById(studentEntity);
+    }
+
+    @ResponseBody
+    @GetMapping("getImageUrlByStudentId/{id}")
+    public String getImageUrlByStudentId(@PathVariable String id){
+        String healthyId;
+        healthyId=studentMapper.selectOne(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getStudentId,id)).getHealthId();
+        return healthMapper.selectById(healthyId).getImageUrl();
+
+    }
 
 
     public List<StudentEntity> findStudentByStudentName(String Name){
-        return studentMapper.selectList(Wrappers.<StudentEntity>lambdaQuery().like(StudentEntity::getStudentName, Name));
+        return studentMapper.selectList(new QueryWrapper<StudentEntity>().like("student_name",Name));
     }
 
     @GetMapping
@@ -56,8 +86,6 @@ public class StudentController {
         List<StudentEntity> students=findStudentByStudentName(studentName);
         return Result.success(students);
     }
-
-
     //修改用户
     @PostMapping
     public Result<?> updateStudent(@RequestBody StudentEntity s){
@@ -71,7 +99,6 @@ public class StudentController {
         }
 
     }
-
     //删除用户
     @DeleteMapping("/{id}")
     public Result<?> deleteById(@PathVariable Integer id){
@@ -102,4 +129,5 @@ public class StudentController {
         StudentEntity student= studentService.getById(id);
         return Result.success(student);
     }
+
 }
