@@ -43,5 +43,17 @@ public class StudentConditionEntity {
     @TableField("subject_four")
     private Integer subjectFour;
 
+    @TableField("practice_time_one")
+    private Integer practiceTimeOne;
+
+    @TableField("practice_time_two")
+    private Integer practiceTimeTwo;
+
+    @TableField("practice_time_three")
+    private Integer practiceTimeThree;
+
+    @TableField("practice_time_four")
+    private Integer practiceTimeFour;
+
 
 }

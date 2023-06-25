@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.driving_system_back.mapper.PracticeApplicationMapper">
-
+    <resultMap id="studentApplyNameResultMap" type="com.example.driving_system_back.entity.StudentApplyNameEntity">
+        <id column="practiceId" property="practiceId"/>
+        <result column="student_id" property="studentId"/>
+        <result column="coach_id" property="coachId"/>
+        <result column="application_state" property="applicationState"/>
+        <result column="practice_datetime" property="practiceDatetime"/>
+        <result column="student_name" property="studentName"/>
+    </resultMap>
+    <resultMap id="StudentApplyNameMap" type="com.example.driving_system_back.entity.StudentApplyNameEntity">
+        <id column="practice_id" property="practiceId"/>
+        <result column="student_id" property="studentId"/>
+        <result column="coach_id" property="coachId"/>
+        <result column="application_state" property="applicationState"/>
+        <result column="practice_datetime" property="practiceDatetime"/>
+        <result column="student_name" property="studentName"/>
+    </resultMap>
+    <select id="getStudentApplyWithNameByStudentId" resultMap="studentApplyNameResultMap">
+        select sa.practice_id , sa.application_state, sa.practice_datetime, sa.coach_id, sa.student_id, s.student_name
+        from practice_application sa join student s on sa.student_id = s.student_id
+        where sa.student_id = #{studentId}
+    </select>
+    <select id="listApplyWithStudent" resultMap="StudentApplyNameMap">
+        SELECT sa.practice_id,sa.practice_datetime,sa.student_id, sa.application_state, s.student_name,sa.coach_id
+        FROM practice_application sa
+                 INNER JOIN student s ON sa.student_id = s.student_id
+        WHERE sa.student_id IN (
+            SELECT student_id FROM practice_apply GROUP BY student_id HAVING COUNT(*) > 1
+        ) ORDER BY sa.student_id
+    </select>
 </mapper>

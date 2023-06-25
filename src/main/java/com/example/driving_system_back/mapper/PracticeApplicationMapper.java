@@ -2,7 +2,11 @@ package com.example.driving_system_back.mapper;
 
 import com.example.driving_system_back.entity.PracticeApplicationEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.driving_system_back.entity.StudentApplyNameEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface PracticeApplicationMapper extends BaseMapper<PracticeApplicationEntity> {
-
+    List<StudentApplyNameEntity> getStudentApplyWithNameByStudentId(String studentId);
+    List<StudentApplyNameEntity> listApplyWithStudent();
 }

@@ -4,28 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 练车申请
- * </p>
- *
- * @author Double-Hong and My-way and 何栋梁 and 肖雅云
- * @since 2023-06-24 10:27:57
- */
-@Getter
-@Setter
-@Accessors(chain = true)
-@TableName("practice_application")
-@ApiModel(value = "PracticeApplicationEntity对象", description = "练车申请")
-public class PracticeApplicationEntity {
+import java.time.LocalDateTime;
 
+@TableName("coach_student_list")
+public class coachStudentListEntity {
     @TableId(value = "practice_id", type = IdType.AUTO)
     private String practiceId;
 
@@ -41,8 +25,6 @@ public class PracticeApplicationEntity {
     @ApiModelProperty("申请状态,教练同意还是拒绝")
     @TableField("application_state")
     private Boolean applicationState;
-
-    @TableField(exist = false) // 学生姓名不是此表中的字段
-    private String name;
-
+    @TableField("student_name")
+    private String studentName;
 }
