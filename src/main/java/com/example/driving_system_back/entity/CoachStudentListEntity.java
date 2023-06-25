@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @TableName(value ="coach_student_list")
 @Data
-public class CoachStudentList implements Serializable {
+public class CoachStudentListEntity implements Serializable {
     /**
      * 
      */

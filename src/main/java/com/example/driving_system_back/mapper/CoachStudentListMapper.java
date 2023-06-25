@@ -1,7 +1,7 @@
 package com.example.driving_system_back.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.driving_system_back.entity.CoachStudentList;
+import com.example.driving_system_back.entity.CoachStudentListEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity generator.entity.CoachStudentList
 */
 @Mapper
-public interface CoachStudentListMapper extends BaseMapper<CoachStudentList> {
+public interface CoachStudentListMapper extends BaseMapper<CoachStudentListEntity> {
 
 }
 
