@@ -54,6 +54,4 @@ public class StudentConditionEntity {
 
     @TableField("practice_time_four")
     private Integer practiceTimeFour;
-
-
 }
