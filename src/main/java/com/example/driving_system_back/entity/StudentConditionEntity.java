@@ -12,21 +12,24 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 学生学习情况及考试情况，记录的成绩是最高成绩
  * </p>
  *
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
- * @since 2023-06-03 14:03:41
+ * @since 2023-06-24 10:27:57
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("exam")
-@ApiModel(value = "ExamEntity对象", description = "")
-public class ExamEntity {
+@TableName("student_condition")
+@ApiModel(value = "StudentConditionEntity对象", description = "学生学习情况及考试情况，记录的成绩是最高成绩")
+public class StudentConditionEntity {
 
-    @TableId(value = "exam_id", type = IdType.AUTO)
-    private String examId;
+    @TableId(value = "condition_id", type = IdType.AUTO)
+    private String conditionId;
+
+    @TableField("student_id")
+    private String studentId;
 
     @TableField("subject_one")
     private Integer subjectOne;
@@ -40,20 +43,15 @@ public class ExamEntity {
     @TableField("subject_four")
     private Integer subjectFour;
 
-    @TableField("state_one")
-    private Boolean stateOne;
+    @TableField("practice_time_one")
+    private Integer practiceTimeOne;
 
-    @TableField("state_two")
-    private Boolean stateTwo;
+    @TableField("practice_time_two")
+    private Integer practiceTimeTwo;
 
-    @TableField("state_three")
-    private Boolean stateThree;
+    @TableField("practice_time_three")
+    private Integer practiceTimeThree;
 
-    @TableField("state_four")
-    private Boolean stateFour;
-
-    @TableField("student_id")
-    private String studentId;
-
-
+    @TableField("practice_time_four")
+    private Integer practiceTimeFour;
 }

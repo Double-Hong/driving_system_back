@@ -58,4 +58,6 @@ public class CoachEntity {
     @TableField("introduction")
     private String introduction;
 
+    @TableField("head_photo")
+    private String headPhoto;
 }
