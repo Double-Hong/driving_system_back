@@ -55,4 +55,7 @@ public class ExaminationEntity {
     @TableField("examination_subject")
     private String examinationSubject;
 
+    @TableField("examination_address")
+    private String examinationAddress;
+
 }

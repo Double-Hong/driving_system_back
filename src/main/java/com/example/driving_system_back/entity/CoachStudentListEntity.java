@@ -1,6 +1,8 @@
 package com.example.driving_system_back.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -17,32 +19,33 @@ public class CoachStudentListEntity implements Serializable {
     /**
      * 
      */
-    private String practice_id;
+    @TableId(value = "practice_id",type = IdType.AUTO)
+    private String practiceId;
 
     /**
      * 
      */
-    private String student_id;
+    private String studentId;
 
     /**
      * 
      */
-    private String student_name;
+    private String studentName;
 
     /**
      * 
      */
-    private String coach_id;
+    private String coachId;
 
     /**
      * 
      */
-    private Date practice_datetime;
+    private Date practiceDatetime;
 
     /**
      * 申请状态,教练同意还是拒绝
      */
-    private Integer application_state;
+    private Integer applicationState;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
