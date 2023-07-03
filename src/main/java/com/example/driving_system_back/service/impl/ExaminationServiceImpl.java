@@ -1,6 +1,6 @@
 package com.example.driving_system_back.service.impl;
 
-import com.example.driving_system_back.entity.ExaminationEntity;
+import  com.example.driving_system_back.entity.ExaminationEntity;
 import com.example.driving_system_back.mapper.ExaminationMapper;
 import com.example.driving_system_back.service.ExaminationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
