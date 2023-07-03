@@ -1,13 +1,11 @@
 package com.example.driving_system_back.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.driving_system_back.entity.ExamRecordsEntity;
 import com.example.driving_system_back.mapper.ExamRecordsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,13 +20,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/exam-records-entity")
 public class ExamRecordsController {
-        @Autowired
-    ExamRecordsMapper examRecordsMapper;
 
-        @ResponseBody
+    @Autowired
+    public ExamRecordsMapper examRecordsMapper;
+
+    //获取当场考试的考试记录
+    @GetMapping("/getExamRecords/{examinationId}")
+    public List<ExamRecordsEntity> getExamRecords(@PathVariable String examinationId){
+        return examRecordsMapper.selectList(new QueryWrapper<ExamRecordsEntity>().eq("examination_id",examinationId));
+    }
+    @ResponseBody
     @GetMapping("/getExamRecordByStudentId/{studentId}")
     public List<ExamRecordsEntity> getExamRecordByStudentId(String studentId){
-            return examRecordsMapper.selectList(Wrappers.<ExamRecordsEntity>lambdaQuery().eq(ExamRecordsEntity::getStudentId,studentId));
-        }
-
+        return examRecordsMapper.selectList(Wrappers.<ExamRecordsEntity>lambdaQuery().eq(ExamRecordsEntity::getStudentId,studentId));
+    }
 }
