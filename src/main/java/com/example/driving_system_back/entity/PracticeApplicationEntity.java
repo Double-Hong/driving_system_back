@@ -48,7 +48,5 @@ public class PracticeApplicationEntity {
     @TableField("practice_type")
     private String practiceType;
 
-    @TableField("practice_type")
-    private String practiceType;
 
 }
