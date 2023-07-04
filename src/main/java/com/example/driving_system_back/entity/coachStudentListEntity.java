@@ -48,6 +48,5 @@ public class CoachStudentListEntity implements Serializable {
      */
     private Integer applicationState;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+
 }
