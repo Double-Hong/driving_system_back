@@ -18,6 +18,5 @@ import java.util.List;
  */
 @Mapper
 public interface PracticeApplicationMapper extends BaseMapper<PracticeApplicationEntity> {
-    List<StudentApplyNameEntity> getStudentApplyWithNameByStudentId(String studentId);
-    List<StudentApplyNameEntity> listApplyWithStudent();
+
 }

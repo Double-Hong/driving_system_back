@@ -1,14 +1,15 @@
 package com.example.driving_system_back.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.driving_system_back.entity.PracticeApplicationEntity;
 import com.example.driving_system_back.entity.Result;
-import com.example.driving_system_back.entity.coachStudentListEntity;
-import com.example.driving_system_back.mapper.coachStudentListMapper;
+import com.example.driving_system_back.entity.CoachStudentListEntity;
+import com.example.driving_system_back.mapper.CoachStudentListMapper;
+import com.example.driving_system_back.mapper.PracticeApplicationMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,44 +22,48 @@ import java.util.List;
  * @since 2023-06-24 10:27:57
  */
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5173")
 @RequestMapping("/practice-application-entity")
+@Slf4j
 public class PracticeApplicationController {
 
     @Autowired
-    private coachStudentListMapper coachStudentListMapper;
+    private CoachStudentListMapper coachStudentListMapper;
+    @Autowired
+    private PracticeApplicationMapper practiceApplicationMapper;
 
-//    @Autowired
-//    private PracticeApplicationMapper practiceApplicationMapper;
-//
-//    @Autowired
-//    private StudentService studentService;
-//    @GetMapping("/getApplicationById/{studentId}")
-//    public List<StudentApplyNameEntity> getStudentApplyNameByStudentId(@PathVariable String studentId) {
-//        // 先查询学生信息
-//        StudentEntity student = studentService.getById(studentId);
-//        if (student == null) {
-//            throw new RuntimeException("没有找到学生信息");
-//        }
-//        // 查询学生申请信息和对应的学生姓名
-//        List<StudentApplyNameEntity> applyList = practiceApplicationMapper.getStudentApplyWithNameByStudentId(studentId);
-//        // 将查询结果中的学生姓名设置为已知结果
-//        for (StudentApplyNameEntity apply : applyList) {
-//            apply.setStudentName(student.getStudentName());
-//        }
-//        return applyList;
-//    }
-//    @GetMapping("/same_student")
-//    public List<StudentApplyNameEntity> listSameStudentApply() {
-//        return practiceApplicationMapper.listApplyWithStudent();
-//    }
     @GetMapping("/student/{studentId}")
     public Result<?> getApplicationById(@PathVariable String studentId){
-        List<coachStudentListEntity> students = (List<coachStudentListEntity>) coachStudentListMapper.selectById(studentId);
+        List<CoachStudentListEntity> students = (List<CoachStudentListEntity>) coachStudentListMapper.selectById(studentId);
         return Result.success(students);
     }
     @GetMapping
     public Result<?> getAllApplication(){
-        List<coachStudentListEntity> students = coachStudentListMapper.selectList(new QueryWrapper<coachStudentListEntity>().like("student_name",""));
+        LambdaQueryWrapper<CoachStudentListEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(CoachStudentListEntity::getStudentName,"");
+        List<CoachStudentListEntity> students = coachStudentListMapper.selectList(queryWrapper);
+        //log.info("查询的学生信息："+students);
         return Result.success(students);
+    }
+    @PostMapping("/saveApplication")
+    public Result<?> saveApplication(@RequestBody CoachStudentListEntity coachStudentListEntity){
+        coachStudentListMapper.updateById(coachStudentListEntity);
+        return Result.success();
+    }
+    @PostMapping("/updateApplication")
+    public Result<?> updateApplication(@RequestBody CoachStudentListEntity coachStudent){
+        System.out.println("123412412");
+        System.out.println(coachStudent.getPracticeId());
+        PracticeApplicationEntity practiceApplication= practiceApplicationMapper.selectById(coachStudent.getPracticeId());
+        System.out.println(practiceApplication.getPracticeId());
+        practiceApplication.setApplicationState(coachStudent.getApplicationState());
+        System.out.println(practiceApplication);
+        if(practiceApplicationMapper.updateById(practiceApplication)==1){
+            return Result.success();
+        }
+        else{
+            return Result.fail();
+        }
+
     }
 }

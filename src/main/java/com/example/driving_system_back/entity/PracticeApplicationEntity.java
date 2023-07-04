@@ -40,9 +40,10 @@ public class PracticeApplicationEntity {
 
     @ApiModelProperty("申请状态,教练同意还是拒绝")
     @TableField("application_state")
-    private Boolean applicationState;
+    private Integer applicationState;
 
-    @TableField(exist = false) // 学生姓名不是此表中的字段
-    private String name;
+    @TableField("practice_type")
+    private String practiceType;
+
 
 }

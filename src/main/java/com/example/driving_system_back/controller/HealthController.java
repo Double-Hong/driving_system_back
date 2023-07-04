@@ -41,5 +41,6 @@ public class HealthController {
     @PostMapping ("/updateHealty")
     public  int updateHealty(@RequestBody HealthEntity healthEntity){
      return healthMapper.updateById(healthEntity);
+
  }
 }

@@ -1,7 +1,15 @@
 package com.example.driving_system_back.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.example.driving_system_back.entity.CoachStudentListEntity;
+import com.example.driving_system_back.entity.Result;
+import com.example.driving_system_back.entity.StudentConditionEntity;
+import com.example.driving_system_back.mapper.StudentConditionMapper;
+import com.example.driving_system_back.mapper.StudentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student-condition-entity")
 public class StudentConditionController {
+    @Autowired
+    private StudentConditionMapper studentMapper;
 
+    @GetMapping("/getAll/{studentName}")
+    public Result<?> getAllCondition(@PathVariable String studentName) {
+        LambdaQueryWrapper<StudentConditionEntity> query = new LambdaQueryWrapper<StudentConditionEntity>();
+        query.like(StudentConditionEntity::getStudentId,studentName);
+        List<StudentConditionEntity> students = studentMapper.selectList(query);
+        return Result.success(students);
+    }
+
+    @PostMapping("/updateTime")
+    public Result<?> updateTime(@RequestBody StudentConditionEntity studentCondition){
+        LambdaQueryWrapper<StudentConditionEntity> query = new LambdaQueryWrapper<StudentConditionEntity>();
+        query.eq(StudentConditionEntity::getConditionId,studentCondition.getConditionId());
+        StudentConditionEntity stuCondition = studentMapper.selectById(query);
+        stuCondition.setPracticeTimeTwo(studentCondition.getPracticeTimeTwo()+studentCondition.getPracticeTimeTwo());
+        if(studentMapper.updateById(stuCondition)==1){
+            return Result.success();
+        }
+        else{
+            return Result.fail();
+        }
+    }
 }

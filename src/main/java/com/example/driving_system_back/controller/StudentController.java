@@ -7,6 +7,7 @@ import com.example.driving_system_back.entity.StudentEntity;
 import com.example.driving_system_back.mapper.HealthMapper;
 import com.example.driving_system_back.mapper.StudentMapper;
 import com.example.driving_system_back.service.StudentService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ public class StudentController {
     }
     @ResponseBody
     @GetMapping("/studentDelete/{id}")
-    public int studentDelete(@PathVariable int id){
+    public int studentDelete(@PathVariable Integer id){
         return studentMapper.deleteById(id);
     }
 
@@ -87,11 +88,9 @@ public class StudentController {
         return Result.success(students);
     }
     //修改用户
-    @PostMapping
+    @PostMapping("/updateStudent")
     public Result<?> updateStudent(@RequestBody StudentEntity s){
-        if(studentService.updateById(s)){
-//            String name="";
-//            List<StudentEntity> students=findStudentByStudentName(name);
+        if(studentMapper.updateById(s)!=0){
             return Result.success();
         }
         else{
@@ -119,14 +118,15 @@ public class StudentController {
         String s = UUID.randomUUID().toString();
         student.setStudentId(s);
         student.setPassword("123456");
-        studentService.save(student);
+        studentMapper.insert(student);
         return Result.success();
     }
 
     //通过id查找
     @GetMapping("/findById/{id}")
-    public Result<?> findStudentById(@PathVariable String id){
-        StudentEntity student= studentService.getById(id);
+    public Result<?> findStudentById(@PathVariable Integer id){
+        StudentEntity student= studentMapper.selectById(id);
+        System.out.println(student);
         return Result.success(student);
     }
 

@@ -1,18 +1,20 @@
 package com.example.driving_system_back.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.driving_system_back.entity.coachStudentListEntity;
+import com.example.driving_system_back.entity.CoachStudentListEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <p>
- * 打卡信息 Mapper 接口
- * </p>
- *
- * @author Double-Hong and My-way and 何栋梁 and 肖雅云
- * @since 2023-06-24 10:27:57
- */
+* @author 10162
+* @description 针对表【coach_student_list】的数据库操作Mapper
+* @createDate 2023-06-25 15:28:39
+* @Entity generator.entity.CoachStudentList
+*/
 @Mapper
-public interface coachStudentListMapper extends BaseMapper<coachStudentListEntity> {
+public interface CoachStudentListMapper extends BaseMapper<CoachStudentListEntity> {
 
 }
+
+
+
+

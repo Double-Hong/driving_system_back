@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @time :16:23
  **/
 @RestController
-@RequestMapping("/coach-student-list-entity")
+@RequestMapping("/coach_student_list_entity")
 public class CoachStudentListController {
 }

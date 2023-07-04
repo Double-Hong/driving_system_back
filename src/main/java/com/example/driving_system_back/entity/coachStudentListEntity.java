@@ -4,27 +4,50 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.sql.Date;
 
-@TableName("coach_student_list")
-public class coachStudentListEntity {
-    @TableId(value = "practice_id", type = IdType.AUTO)
+/**
+ *
+ * @TableName coach_student_list
+ */
+@TableName(value ="coach_student_list")
+@Data
+public class CoachStudentListEntity implements Serializable {
+    /**
+     *
+     */
+
     private String practiceId;
 
-    @TableField("student_id")
+    /**
+     *
+     */
     private String studentId;
 
-    @TableField("coach_id")
+    /**
+     *
+     */
+    private String studentName;
+
+    /**
+     *
+     */
     private String coachId;
 
-    @TableField("practice_datetime")
-    private LocalDateTime practiceDatetime;
+    /**
+     *
+     */
+    private Date practiceDatetime;
 
-    @ApiModelProperty("申请状态,教练同意还是拒绝")
-    @TableField("application_state")
-    private Boolean applicationState;
-    @TableField("student_name")
-    private String studentName;
+    /**
+     * 申请状态,教练同意还是拒绝
+     */
+    private Integer applicationState;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }
