@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -35,7 +37,8 @@ public class PracticeApplicationEntity {
     @TableField("coach_id")
     private String coachId;
 
-    @TableField("practice_datetime")
+    @ApiModelProperty(value="练习时间")
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern= "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime practiceDatetime;
 
     @ApiModelProperty("申请状态,教练同意还是拒绝")
@@ -45,5 +48,7 @@ public class PracticeApplicationEntity {
     @TableField("practice_type")
     private String practiceType;
 
+    @TableField("practice_type")
+    private String practiceType;
 
 }
