@@ -26,7 +26,7 @@ public class Generator {
     private static final String PACKAGE_NAME = "com.example.driving_system_back";
 
     // 表名,多个表使用英文逗号分割
-    private static final String[] TBL_NAMES = {"exam_records","check_information","practice_application","student_condition"};
+    private static final String[] TBL_NAMES = {"video"};
 
     // 表名的前缀,从表生成代码时会去掉前缀
     private static final String TABLE_PREFIX = "tbl_";
