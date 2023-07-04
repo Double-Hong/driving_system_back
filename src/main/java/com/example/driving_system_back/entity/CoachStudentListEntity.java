@@ -10,35 +10,35 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
+ *
  * @TableName coach_student_list
  */
 @TableName(value ="coach_student_list")
 @Data
 public class CoachStudentListEntity implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(value = "practice_id",type = IdType.AUTO)
     private String practiceId;
 
     /**
-     * 
+     *
      */
     private String studentId;
 
     /**
-     * 
+     *
      */
     private String studentName;
 
     /**
-     * 
+     *
      */
     private String coachId;
 
     /**
-     * 
+     *
      */
     private Date practiceDatetime;
 
@@ -47,6 +47,4 @@ public class CoachStudentListEntity implements Serializable {
      */
     private Integer applicationState;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }
