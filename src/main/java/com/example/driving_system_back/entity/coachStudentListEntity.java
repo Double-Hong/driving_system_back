@@ -48,5 +48,4 @@ public class CoachStudentListEntity implements Serializable {
      */
     private Integer applicationState;
 
-
 }
