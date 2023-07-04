@@ -1,7 +1,10 @@
 package com.example.driving_system_back.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.driving_system_back.entity.StudentConditionEntity;
+import com.example.driving_system_back.mapper.StudentConditionMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -14,5 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student-condition-entity")
 public class StudentConditionController {
+ @Autowired
+    StudentConditionMapper studentConditionMapper;
 
+
+ @ResponseBody
+ @GetMapping("/getStudentConditionById/{studentId}")
+ public StudentConditionEntity getStudentConditionById(@PathVariable String studentId){
+     return studentConditionMapper.selectOne(Wrappers.<StudentConditionEntity>lambdaQuery().eq(StudentConditionEntity::getStudentId,studentId));
+ }
+
+ @ResponseBody
+ @GetMapping("/addObjectOneTimeByStudentId/{studentId}/{time}")
+ public int addObjectOneTimeByStudentId(@PathVariable String studentId ,@PathVariable int time){
+     StudentConditionEntity studentConditionEntity=studentConditionMapper.selectOne(Wrappers.<StudentConditionEntity>lambdaQuery().eq(StudentConditionEntity::getStudentId,studentId));
+     studentConditionEntity.setPracticeTimeOne(studentConditionEntity.getPracticeTimeOne()+time);
+        return studentConditionMapper.updateById(studentConditionEntity);
+
+ }
 }

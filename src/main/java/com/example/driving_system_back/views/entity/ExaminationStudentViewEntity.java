@@ -2,9 +2,12 @@ package com.example.driving_system_back.views.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * @author :Double-Hong
@@ -36,4 +39,20 @@ public class ExaminationStudentViewEntity {
     @TableField("examination_name")
     private String examinationName;
 
+    @TableField("examination_type")
+    private String examinationType;
+
+    @TableField("examination_subject")
+    private String examinationSubject;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField("examination_open_time")
+    private LocalDateTime examinationOpenTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField("examination_close_time")
+    private LocalDateTime examinationCloseTime;
+
+    @TableField("examination_time")
+    private Integer examinationTime;
 }
