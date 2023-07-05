@@ -56,4 +56,9 @@ public class ExaminationController {
     public List<ExaminationEntity> findExam(@PathVariable String search, @PathVariable String orgId) {
         return examinationMapper.selectList(new QueryWrapper<ExaminationEntity>().like("examination_name", search).eq("organization_id", orgId));
     }
+
+    @GetMapping("/getAllExamination")//得到所有考试信息
+    public List<ExaminationEntity> getAllExamination() {
+        return examinationMapper.selectList(null);
+    }
 }

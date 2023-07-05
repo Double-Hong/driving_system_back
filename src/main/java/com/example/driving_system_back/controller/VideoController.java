@@ -1,6 +1,7 @@
 package com.example.driving_system_back.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.driving_system_back.entity.VideoEntity;
 import com.example.driving_system_back.mapper.VideoMapper;
 import lombok.experimental.Accessors;
@@ -60,6 +61,13 @@ public class VideoController {
         VideoEntity videoEntity = videoMapper.selectById(id);
         videoMapper.deleteById(id);
         return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("school_name", videoEntity.getSchoolName()));
+    }
+
+    @ResponseBody
+    @GetMapping("/getAllVideoInfoByStudyType/{studyType}")//获取视频
+    public List<VideoEntity> getAllVideoInfoByStudyType(@PathVariable String studyType){
+
+        return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("study_type",studyType));
     }
 
 }

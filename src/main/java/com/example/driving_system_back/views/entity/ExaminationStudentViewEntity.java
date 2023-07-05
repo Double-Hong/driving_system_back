@@ -52,4 +52,7 @@ public class ExaminationStudentViewEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField("examination_close_time")
     private LocalDateTime examinationCloseTime;
+
+    @TableField("examination_time")
+    private Integer examinationTime;
 }

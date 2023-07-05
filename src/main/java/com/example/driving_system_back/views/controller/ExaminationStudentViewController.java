@@ -33,4 +33,8 @@ public class ExaminationStudentViewController {
     public List<ExaminationStudentViewEntity> getByExamId(@PathVariable  String examId) {
         return examinationStudentViewMapper.selectList(new QueryWrapper<ExaminationStudentViewEntity>().eq("examination_id", examId));
     }
+    @GetMapping("/getByStudentId/{studentId}")
+    public List<ExaminationStudentViewEntity> getByStudentId(@PathVariable  String studentId) {
+        return examinationStudentViewMapper.selectList(new QueryWrapper<ExaminationStudentViewEntity>().eq("student_id", studentId));
+    }
 }

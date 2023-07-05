@@ -49,5 +49,4 @@ public class MultipleChoiceEntity {
     @TableField("photo_url")
     private String photoUrl;
 
-
 }

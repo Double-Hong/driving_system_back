@@ -33,7 +33,7 @@ public class ExaminationAndMultipleChoiceEntity {
     private String answer;
 
     @TableField("fraction")
-    private String fraction;
+    private int fraction;
 
 
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("exam_records")
 @ApiModel(value = "ExamRecordsEntity对象", description = "考试记录")
+@Data
 public class ExamRecordsEntity {
 
     @TableId(value = "exam_records_id", type = IdType.AUTO)

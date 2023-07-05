@@ -102,4 +102,31 @@ public class MultipleChoiceController {
                 .or().like("option1", search).or().like("option2", search).or().like("option3", search)
                 .or().like("option4", search));
     }
+
+    //随机选择选择题
+    public static boolean isRepeat(int[] arr,int num){   //repeat  :重复
+        for (int j : arr){   //使用增强for循环把数组所有的元素返回，赋值给i
+            if (j == num){  //判断i和生成的随机数是否相等
+                return true;
+            }
+        }
+        return false;
+    }
+   @ResponseBody
+    @GetMapping("/randomChoice/{num}")
+    public List<MultipleChoiceEntity> randomChoice(@PathVariable int num) {
+        List<MultipleChoiceEntity> allMultipleChoiceEntity = multipleChoiceMapper.selectList(null);
+        List<MultipleChoiceEntity> randomMultipleChoiceEntity = new ArrayList<>();
+        int[] arr = new int[num];
+        for (int i = 0; i < num; i++) {
+            int random = (int) (Math.random() * allMultipleChoiceEntity.size());
+            if (isRepeat(arr, random)) {
+                i--;
+            } else {
+                arr[i] = random;
+                randomMultipleChoiceEntity.add(allMultipleChoiceEntity.get(random));
+            }
+        }
+        return randomMultipleChoiceEntity;
+    }
 }

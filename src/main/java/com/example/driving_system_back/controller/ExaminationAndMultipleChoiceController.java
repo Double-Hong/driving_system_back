@@ -39,7 +39,7 @@ public class ExaminationAndMultipleChoiceController {
     }
 
     @GetMapping("getFractionById/{eid},{bid}")
-    public String getFractionById(@PathVariable String eid, @PathVariable String bid) {
+    public int getFractionById(@PathVariable String eid, @PathVariable String bid) {
         return examinationAndMultipleChoiceMapper.selectOne(Wrappers.<ExaminationAndMultipleChoiceEntity>lambdaQuery().eq(ExaminationAndMultipleChoiceEntity::getExaminationId, eid).eq(ExaminationAndMultipleChoiceEntity::getMultipleChoiceId, bid)).getFraction();
 
     }
@@ -55,7 +55,7 @@ public class ExaminationAndMultipleChoiceController {
     }
 
     @GetMapping("/modifyFractionInOneExam/{examId},{choiceId},{fraction}")//修改考试中一个题目的分值
-    public int modifyFractionInOneExam(@PathVariable String choiceId, @PathVariable String examId, @PathVariable String fraction) {
+    public int modifyFractionInOneExam(@PathVariable String choiceId, @PathVariable String examId, @PathVariable int fraction) {
         ExaminationAndMultipleChoiceEntity examinationAndMultipleChoiceEntity = examinationAndMultipleChoiceMapper.selectOne(new QueryWrapper<ExaminationAndMultipleChoiceEntity>().eq("examination_id", examId)
                 .eq("multiple_choice_id", choiceId));
         examinationAndMultipleChoiceEntity.setFraction(fraction);
