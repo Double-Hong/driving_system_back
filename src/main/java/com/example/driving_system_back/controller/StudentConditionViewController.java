@@ -1,9 +1,13 @@
 package com.example.driving_system_back.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWrapper;
+import com.example.driving_system_back.entity.PracticeApplicationEntity;
 import com.example.driving_system_back.entity.Result;
 import com.example.driving_system_back.entity.StudentConditionEntity;
 import com.example.driving_system_back.entity.StudentConditionViewEntity;
+import com.example.driving_system_back.mapper.PracticeApplicationMapper;
 import com.example.driving_system_back.mapper.StudentConditionMapper;
 import com.example.driving_system_back.mapper.StudentConditionViewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,9 @@ public class StudentConditionViewController {
     @Autowired
     private StudentConditionMapper studentConditionMapper;
 
+
+    @Autowired
+    private PracticeApplicationMapper   practiceApplicationMapper;
 
     //获取所有学生信息
     @PostMapping("/getAllCondition")
@@ -61,17 +68,27 @@ public class StudentConditionViewController {
     //修改学生信息
     @PostMapping("/updateStudentCondition")
     public Result<?> updateStudentCondition(@RequestBody StudentConditionViewEntity entity){
-//        LambdaQueryWrapper<StudentConditionEntity> queryWrapper=new LambdaQueryWrapper<StudentConditionEntity>();
-//        queryWrapper.eq(StudentConditionEntity::getStudentId, entity.getStudentId());
+        //修改student Condition里的数据
+        LambdaQueryWrapper<StudentConditionEntity> queryWrapper=new LambdaQueryWrapper<StudentConditionEntity>();
+        queryWrapper.eq(StudentConditionEntity::getStudentId, entity.getStudentId());
         StudentConditionEntity studentConditionEntity = studentConditionMapper.selectById(entity.getConditionId());
         studentConditionEntity.setPracticeTimeTwo(entity.getPracticeTimeTwo());
         studentConditionEntity.setPracticeTimeThree(entity.getPracticeTimeThree());
+        //修改practiceApplicaiotion的数据
+        LambdaQueryWrapper<PracticeApplicationEntity> practiceApplicationEntityLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        System.out.println(entity.getStudentId());
+        practiceApplicationEntityLambdaQueryWrapper.eq(PracticeApplicationEntity::getPracticeId,entity.getPracticeId());
+        PracticeApplicationEntity practiceApplication = practiceApplicationMapper.selectOne(practiceApplicationEntityLambdaQueryWrapper);
+        practiceApplication.setApplicationState(entity.getApplicationState());
+        practiceApplicationMapper.updateById(practiceApplication);
         if(studentConditionMapper.updateById(studentConditionEntity)==1){
             return Result.success();
         }
         else{
             return Result.fail();
         }
+
+
     }
 
 }
