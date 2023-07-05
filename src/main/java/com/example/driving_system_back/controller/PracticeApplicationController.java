@@ -90,4 +90,6 @@ public class PracticeApplicationController {
     public int deletedById(@PathVariable String id){
         return practiceApplicationMapper.deleteById(id);
     }
+
+
 }

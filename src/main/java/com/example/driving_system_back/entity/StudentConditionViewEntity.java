@@ -55,7 +55,7 @@ public class StudentConditionViewEntity implements Serializable {
 
     private String studentName;
 
-    private Boolean applicationState;
+    private int applicationState;
 
     private String practiceType;
 

@@ -45,7 +45,7 @@ public class PracticeApplicationEntity {
 
     @ApiModelProperty("申请状态,教练同意还是拒绝")
     @TableField("application_state")
-    private Boolean applicationState;
+    private int applicationState;
 
     @TableField("practice_type")
     private String practiceType;
