@@ -42,4 +42,7 @@ public class ExamingViewEntity {
     @TableField("option4")
     private String option4;
 
+    @TableField("photo_url")
+    private  String photoUrl;
+
 }

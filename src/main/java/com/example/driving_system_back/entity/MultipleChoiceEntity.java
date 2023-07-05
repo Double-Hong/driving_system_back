@@ -46,5 +46,6 @@ public class MultipleChoiceEntity {
     @TableField("correct_answer")
     private String correctAnswer;
 
-
+   @TableField("photo_url")
+   private  String photoUrl;
 }
