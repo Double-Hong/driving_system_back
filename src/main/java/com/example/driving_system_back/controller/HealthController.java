@@ -35,7 +35,7 @@ public class HealthController {
     @GetMapping("getHealthyDataByStudentId/{Id}")
     public HealthEntity getHealthyDataByStudentId(@PathVariable String Id){
 
-     return healthMapper.selectById(studentMapper.selectById(Id).getHealthId());
+     return healthMapper.selectOne(Wrappers.<HealthEntity>lambdaQuery().eq(HealthEntity::getStudentId,Id));
  }
  @ResponseBody
     @PostMapping ("/updateHealty")

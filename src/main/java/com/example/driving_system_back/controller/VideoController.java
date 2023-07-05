@@ -67,7 +67,7 @@ public class VideoController {
     @GetMapping("/getAllVideoInfoByStudyType/{studyType}")//获取视频
     public List<VideoEntity> getAllVideoInfoByStudyType(@PathVariable String studyType){
 
-        return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("study_type",studyType));
+        return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("video_type",studyType));
     }
 
 }

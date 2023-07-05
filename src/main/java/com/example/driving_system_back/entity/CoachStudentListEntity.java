@@ -45,6 +45,6 @@ public class CoachStudentListEntity implements Serializable {
     /**
      * 申请状态,教练同意还是拒绝
      */
-    private Integer applicationState;
+    private Boolean applicationState;
 
 }

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -21,6 +22,7 @@ import lombok.experimental.Accessors;
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
  * @since 2023-06-24 10:27:57
  */
+@Data
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -43,7 +45,7 @@ public class PracticeApplicationEntity {
 
     @ApiModelProperty("申请状态,教练同意还是拒绝")
     @TableField("application_state")
-    private Integer applicationState;
+    private Boolean applicationState;
 
     @TableField("practice_type")
     private String practiceType;

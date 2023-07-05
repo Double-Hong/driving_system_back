@@ -87,8 +87,6 @@ public class StudentConditionViewController {
         else{
             return Result.fail();
         }
-
-
     }
 
 }

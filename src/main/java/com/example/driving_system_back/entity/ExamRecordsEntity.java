@@ -37,7 +37,7 @@ public class ExamRecordsEntity {
     private String examinationId;
 
     @TableField("score")
-    private float score;
+    private double score;
 
 
 }
