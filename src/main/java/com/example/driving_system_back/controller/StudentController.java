@@ -45,7 +45,7 @@ public class StudentController {
     }
     @ResponseBody
     @GetMapping("/studentDelete/{id}")
-    public int studentDelete(@PathVariable Integer id){
+    public int studentDelete(@PathVariable String id){
         return studentMapper.deleteById(id);
     }
 
@@ -166,21 +166,6 @@ public class StudentController {
         studentConditionEntity.setConditionId(UUID.randomUUID().toString());
         studentConditionMapper.insert(studentConditionEntity);
         studentMapper.updateById(studentEntity);
-
-//        HealthEntity healthEntity = new HealthEntity();
-//        healthEntity.setStudentId(s);
-//        healthEntity.setHealthId(UUID.randomUUID().toString());
-//        StudentConditionEntity studentConditionEntity = new StudentConditionEntity();
-//        studentConditionEntity.setStudentId(s);
-//        studentConditionEntity.setConditionId(UUID.randomUUID().toString());
-//        studentEntity.setStudentId(s);
-//        studentEntity.setPassword("123456");
-//        studentEntity.setSchoolName("重庆交通驾校");
-//        studentEntity.setCoachId(null);
-//        studentEntity.setHealthId(healthEntity.getHealthId());
-
-//        healthMapper.insert(healthEntity);
-//        studentConditionMapper.insert(studentConditionEntity);
         return "注册成功";
     }
 
