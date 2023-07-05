@@ -56,4 +56,7 @@ public class StudentConditionViewEntity implements Serializable {
     private Integer applicationState;
 
     private String practiceType;
+
+    private String practiceId;
+
 }

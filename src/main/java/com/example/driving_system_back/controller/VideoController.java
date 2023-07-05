@@ -50,4 +50,16 @@ public class VideoController {
         return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("school_name", videoEntity.getSchoolName()));
     }
 
+    /**
+     * 通过视频id删除视频并返回更新后的实体列表
+     * @param id 视频id
+     * @return 视频列表
+     */
+    @GetMapping("/deleteVideo/{id}")
+    public List<VideoEntity> deleteVideo(@PathVariable String id) {
+        VideoEntity videoEntity = videoMapper.selectById(id);
+        videoMapper.deleteById(id);
+        return videoMapper.selectList(new QueryWrapper<VideoEntity>().eq("school_name", videoEntity.getSchoolName()));
+    }
+
 }

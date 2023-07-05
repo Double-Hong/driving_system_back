@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
 
+import com.example.driving_system_back.entity.HealthEntity;
 import com.example.driving_system_back.entity.Result;
+import com.example.driving_system_back.entity.StudentConditionEntity;
 import com.example.driving_system_back.entity.StudentEntity;
 import com.example.driving_system_back.mapper.HealthMapper;
+import com.example.driving_system_back.mapper.StudentConditionMapper;
 import com.example.driving_system_back.mapper.StudentMapper;
 import com.example.driving_system_back.service.StudentService;
 import io.swagger.models.auth.In;
@@ -32,6 +35,8 @@ public class StudentController {
     StudentMapper studentMapper;
     @Autowired
     HealthMapper healthMapper;
+    @Autowired
+    StudentConditionMapper studentConditionMapper;
     @Autowired
     StudentService studentService;
     @PostMapping("/studentLogin")
@@ -130,6 +135,53 @@ public class StudentController {
         StudentEntity student= studentMapper.selectById(id);
         System.out.println(student);
         return Result.success(student);
+    }
+
+    /**
+     * 注册学生
+     * @param studentEntity 学生实体
+     * @return 注册消息
+     */
+    @PostMapping("/registerStudent")
+    public String registerStudent(@RequestBody StudentEntity studentEntity){
+        System.out.println(studentEntity);
+        List<StudentEntity> list = studentMapper.selectList(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getUsername,studentEntity.getUsername()));
+        if(list.size()!=0){
+            return "用户名已存在";
+        }
+        String s = UUID.randomUUID().toString();
+        studentEntity.setStudentId(s);
+        studentEntity.setPassword("123456");
+        studentEntity.setSchoolName("重庆交通驾校");
+        studentEntity.setCoachId(null);
+        studentEntity.setHealthId(null);
+        studentMapper.insert(studentEntity);
+        HealthEntity healthEntity = new HealthEntity();
+        healthEntity.setStudentId(s);
+        healthEntity.setHealthId(UUID.randomUUID().toString());
+        healthMapper.insert(healthEntity);
+        studentEntity.setHealthId(healthEntity.getHealthId());
+        StudentConditionEntity studentConditionEntity = new StudentConditionEntity();
+        studentConditionEntity.setStudentId(s);
+        studentConditionEntity.setConditionId(UUID.randomUUID().toString());
+        studentConditionMapper.insert(studentConditionEntity);
+        studentMapper.updateById(studentEntity);
+
+//        HealthEntity healthEntity = new HealthEntity();
+//        healthEntity.setStudentId(s);
+//        healthEntity.setHealthId(UUID.randomUUID().toString());
+//        StudentConditionEntity studentConditionEntity = new StudentConditionEntity();
+//        studentConditionEntity.setStudentId(s);
+//        studentConditionEntity.setConditionId(UUID.randomUUID().toString());
+//        studentEntity.setStudentId(s);
+//        studentEntity.setPassword("123456");
+//        studentEntity.setSchoolName("重庆交通驾校");
+//        studentEntity.setCoachId(null);
+//        studentEntity.setHealthId(healthEntity.getHealthId());
+
+//        healthMapper.insert(healthEntity);
+//        studentConditionMapper.insert(studentConditionEntity);
+        return "注册成功";
     }
 
 }

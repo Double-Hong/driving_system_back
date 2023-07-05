@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,6 +20,7 @@ import lombok.experimental.Accessors;
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
  * @since 2023-06-03 14:03:41
  */
+@Data
 @Getter
 @Setter
 @Accessors(chain = true)

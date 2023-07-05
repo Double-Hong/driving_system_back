@@ -40,5 +40,7 @@ public class VideoEntity {
     @TableField("video_url")
     private String videoUrl;
 
+    @TableField("video_type")
+    private String videoType;
 
 }
