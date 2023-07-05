@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,6 +20,7 @@ import java.io.Serializable;
  * @author Double-Hong and My-way and 何栋梁 and 肖雅云
  * @since 2023-06-24 10:27:57
  */
+@Data
 @Getter
 @Setter
 @TableName("student_condition_view")
@@ -56,4 +58,5 @@ public class StudentConditionViewEntity implements Serializable {
     private Integer applicationState;
 
     private String practiceType;
+    private String practiceId;
 }
