@@ -56,5 +56,8 @@ public class StudentStudyConditionViewEntity {
     @TableField("practice_time_four")
     private Integer practiceTimeFour;
 
+    @TableField("coach_id")
+    private String coachId;
+
 
 }

@@ -169,4 +169,9 @@ public class StudentController {
         return "注册成功";
     }
 
+    @GetMapping("/getStudentByCoachId/{coachId}")
+    public List<StudentEntity> getStudentByCoachId(@PathVariable String coachId){
+        return studentMapper.selectList(Wrappers.<StudentEntity>lambdaQuery().eq(StudentEntity::getCoachId,coachId));
+    }
+
 }

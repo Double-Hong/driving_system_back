@@ -43,4 +43,8 @@ public class HealthController {
      return healthMapper.updateById(healthEntity);
 
  }
+ @GetMapping("/getHealthById/{id}")
+    public HealthEntity getHealthById(@PathVariable String id){
+     return healthMapper.selectById(id);
+ }
 }
